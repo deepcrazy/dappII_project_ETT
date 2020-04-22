@@ -1,0 +1,25 @@
+.card {
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin: 20px;
+    height: 50vh;
+    padding: 30px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 27.5vh;
+  }
+
+  &__dropdown {
+    margin-top: 2.5rem;
+    min-width: 15rem;
+  }
+}

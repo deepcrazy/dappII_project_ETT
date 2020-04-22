@@ -1,0 +1,18 @@
+@import "../../assets/scss/utils.scss";
+.user_page {
+  margin-top: 2rem;
+}
+.expansion {
+  width: 80%;
+  margin: 0 auto !important;
+}
+// .mg-10 {
+//   margin: 10px;
+// }
+.verification__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,28 @@
+@import "../../assets/scss/utils.scss";
+
+.eventCreateHalfBox {
+  width: 40%;
+  min-width: 300px;
+  margin-bottom: 120px;
+  margin-top: 100px;
+  margin-left: 30%;
+  position: relative;
+}
+.loanHalfBox-pending {
+  z-index: 999;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.detailsRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.headingBox {
+  width: 50%;
+}

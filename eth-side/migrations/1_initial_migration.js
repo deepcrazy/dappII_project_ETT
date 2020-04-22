@@ -1,5 +1,14 @@
-const Migrations = artifacts.require("Migrations");
+const eventTicketingTokenInstance = artifacts.require("EventTicketingToken");
 
 module.exports = function(deployer) {
-  deployer.deploy(Migrations);
+  deployer.then(async () => {
+    await deployer.deploy(eventTicketingTokenInstance);
+  });
 };
+
+
+// const Migrations = artifacts.require("Migrations");
+
+// module.exports = function(deployer) {
+//   deployer.deploy(Migrations);
+// };

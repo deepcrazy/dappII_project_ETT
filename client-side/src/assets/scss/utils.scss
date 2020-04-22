@@ -1,0 +1,50 @@
+.mg-10 {
+  margin: 10px !important;
+}
+.mg-5 {
+  margin: 5px !important;
+}
+.backdrop {
+  z-index: 999;
+}
+.flex {
+  display: flex;
+  &__column {
+    @extend .flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    &__center {
+      @extend .flex__column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__stretch {
+      @extend .flex__column;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+  }
+  &__row {
+    @extend .flex;
+    flex-direction: row;
+    width: 100%;
+
+    &__center {
+      @extend .flex__row;
+      justify-content: center;
+      align-items: center;
+    }
+    &__spaceAround {
+      @extend .flex__row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    &__centerTop {
+      @extend .flex__row;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+  }
+}
