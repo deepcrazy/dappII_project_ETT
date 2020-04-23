@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // loaded conditionally using code splitting below (https://reactjs.org/docs/code-splitting.html)
-// import loanContractInfo from "./scripts/loanContractInfo";
-// import { isOwner } from "./scripts/loanContractInteract";
 const LoginPage = React.lazy(() => {
   return import("./container/LoginPage/LoginPage");
 });
@@ -16,37 +14,22 @@ const AdminPage = React.lazy(() => {
 const UserPage = React.lazy(() => {
   return import("./container/UserPage/UserPage");
 });
-// const ShareholderPage = React.lazy(() => {
-//   return import("../delete_files/ShareholderPage/ShareholderPage");
-// });
+
 const App = () => {
   const account = useSelector(state => {
     return state.account;
   });
-  const [checkOwner, setCheckOwner] = useState(false);
+
   const [type, setType] = useState("");
   const userType = { type, setType };
   let route = null;
-  // console.log(account);
-
+  
   //on page load, set account for contract interaction
   useEffect(() => {
     if (account) {
       // loaded conditionally using code splitting below (https://reactjs.org/docs/code-splitting.html)
       // solves the issue if metamask is not present
-      // import("./scripts/loanContractInfo").then(loanContractInfo => {
-      //   loanContractInfo.default.options.from = account;
-      // });
-      // import("./scripts/daiContractInfo").then(daiContractInfo => {
-      //   daiContractInfo.default.options.from = account;
-      // });
-      // import("./scripts/loanContractInteract").then(func => {
-      //   func
-      //     .isOwner()
-      //     .then(result => setCheckOwner(result))
-      //     .catch(error => console.log(error));
-      // });
-
+      // Note: has to implement in coming future
 
       // import("./scripts/eventTicketingTokenInteract").then(func => {
       //   func
@@ -84,14 +67,6 @@ const App = () => {
             </Switch>
           );
           break;
-        // case "shareholder":
-        //   route = (
-        //     <Switch>
-        //       <Route path="/shareholder" render={() => <ShareholderPage />} />
-        //       <Redirect to="/shareholder" />
-        //     </Switch>
-        //   );
-        //   break;
         // case "admin":
         //   //if admin submitted, but checkOwner failed, reset to user login
         //   userType.setType("user");
@@ -103,6 +78,7 @@ const App = () => {
               <Redirect to="/admin" />
             </Switch>
           );
+        break;
         default:
       }
     // }

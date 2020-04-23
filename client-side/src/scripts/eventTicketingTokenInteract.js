@@ -1,10 +1,8 @@
-// import contractInfo from "./loanContractInfo";
 import contractInfo from "./eventTicketingTokenInfo";
 
 const BN = require("bn.js");
 
-const scaleFactor = 1e18;
-const scaleFactorBN = new BN(10).pow(new BN(18));
+const scaleFactorBN = new BN(10).pow(new BN(18));   //  This basically is 1e18 i.e. 1 ether
 // value = scaleFactorBN.mul(new BN(scaleFactor))
 
 // @notice Check the user is owner or not

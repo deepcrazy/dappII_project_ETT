@@ -18,6 +18,7 @@ const store = createStore(
   blockchainReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
+
 const app = (
   <Provider store={store}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
