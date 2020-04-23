@@ -16,12 +16,13 @@ import { green, red, grey } from "@material-ui/core/colors";
 // import Verification from "../../components/Verification/Verification";
 // import styles from "./UserPage.module.scss";
 import {
+  getEventName,
   getMaximumSeats,
   buyToken,
 } from "../../scripts/eventTicketingTokenInteract";
 import eventTicketingTokenInfo from "../../scripts/eventTicketingTokenInfo";
-// import Backdrop from "@material-ui/core/Backdrop";
-// import CircularProgress from "@material-ui/core/CircularProgress";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSelector } from "react-redux";
 // import moment from "moment";
 // import { Alert, AlertTitle } from "@material-ui/lab";
@@ -96,6 +97,18 @@ function UserPage() {
     console.log(account);
     eventTicketingTokenInfo.options.from = account;
   }, [account]);
+
+  useEffect(() => {
+    getEventName()
+      .then((res) => {
+        console.log("inside event name function - user page");
+        console.log(res);
+        setEventName(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   useEffect(() => {
     getMaximumSeats()
@@ -186,7 +199,7 @@ function UserPage() {
   };
   return (
     <div>
-      {true ? (
+      {status ? (
         <Grid container direction="row">
           {/* <Box m={1}></Box> */}
           <Card className={styles["seatsHalfBox"]} variant="outlined">
@@ -261,7 +274,7 @@ function UserPage() {
                     <Box m={2}></Box>
                     <Typography variant="h6">
                       {" "}
-                      Event Name : {"Exhibition April 2020"}
+                      Event Name : {eventName}
                     </Typography>
                     <Typography variant="h6">
                       {" "}
@@ -282,7 +295,9 @@ function UserPage() {
         </Grid>
       ) : (
         <div>
-          <Typography variant="h5"> No Events available</Typography>
+          <Backdrop open={true}>
+            <CircularProgress color="secondary" />
+          </Backdrop>
         </div>
       )}
 
