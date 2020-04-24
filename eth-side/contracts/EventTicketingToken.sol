@@ -1,5 +1,6 @@
 pragma solidity ^0.5.8;
 
+
 library SafeMath {
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
         uint256 c = a + b;
@@ -69,6 +70,7 @@ library Address {
         // and 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 is returned
         // for accounts without code, i.e. `keccak256('')`
         bytes32 codehash;
+
 
             bytes32 accountHash
          = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
@@ -367,25 +369,11 @@ contract ERC721 is ERC165, IERC721 {
     }
 }
 
-
+// Contract for EventChain - An EventTicketingToken or EventTicketTokenization (ETT) dAPP
 contract EventTicketingToken is ERC721 {
     address public owner;
     address public store;
 
-    constructor() public {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "only owner can do");
-        _;
-    }
-
-    function setStore(address _store) public onlyOwner {
-        store = _store;
-    }
-
-    // address public owner;
     string public tokenName;
     uint8 public decimals;
     string public symbol;
@@ -396,13 +384,32 @@ contract EventTicketingToken is ERC721 {
     string public eventName;
     uint256 maximumSeats;
     mapping(address => uint8) eventId;
-    // address payable eventOwnerWallet;
+
+    // Events
     event LogEventDetails(
         uint8 _eventId,
         string _eventName,
         uint256 _maximumSeats
     );
+    event LogMaximumSeats(uint256 _maximumSeats);
 
+    //  constructor to set the owner who deployed the contract
+    constructor() public {
+        owner = msg.sender;
+    }
+
+    //  modifier to check the owners
+    modifier onlyOwner() {
+        require(msg.sender == owner, "only owner can do");
+        _;
+    }
+
+    function setStore(address _store) public onlyOwner {
+        store = _store;
+    }
+
+    /// @notice Function to create an Event
+    /// @return uint256 EventId to be returned after event created
     function createEvent(
         string memory _eventName,
         // uint8 _eventId,
@@ -427,6 +434,8 @@ contract EventTicketingToken is ERC721 {
         // eventOwnerWallet = _eventOwnerWallet;
     }
 
+    /// @notice Function to buy the token
+    /// @param  _tokenId tokenId to buy for the event
     function buyToken(uint256 _tokenId) public payable {
         require(msg.value == tokenPrice, "Value is not equal to tokenPrice");
         require(_tokenId > 0 && _tokenId <= maximumSeats, "Invalid tokenId");
@@ -449,8 +458,8 @@ contract EventTicketingToken is ERC721 {
         else return false;
     }
 
-    event LogMaximumSeats(uint256 _maximumSeats);
-
+    /// @notice Check user/owner address is zero or not
+    /// @return _maximumSeats Maximum number of seats for the event
     function getMaximumSeats() public view returns (uint256 _maximumSeats) {
         // emit LogMaximumSeats(maximumSeats);
         return maximumSeats;
