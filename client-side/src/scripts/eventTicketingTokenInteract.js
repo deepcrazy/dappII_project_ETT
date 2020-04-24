@@ -19,6 +19,8 @@ export const isEventOwner = () => {
   });
 };
 
+//  @notice Get the maximum number of seats
+//  @return maximum number of seats for the event
 export const getMaximumSeats = () => {
   console.log("getting  maximum seats");
   return new Promise(async (resolve, reject) => {
@@ -32,6 +34,8 @@ export const getMaximumSeats = () => {
   });
 };
 
+//  @notice Get the Event name for the event created  by the event organiser
+//  @return eventName of the  event created
 export const getEventName = () => {
   console.log("getting event name");
   return new Promise(async (resolve, reject) => {
@@ -46,6 +50,8 @@ export const getEventName = () => {
   })
 }
 
+//  @notice Create the event with event details like eventName and maxSeats for the event
+//  @return Trasanction Id of the createEvent Transaction
 export const createEvent = (eventName, maxSeats) => {
   console.log("coming  in web3 ETT");
   console.log(eventName);
@@ -74,6 +80,8 @@ export const createEvent = (eventName, maxSeats) => {
   });
 };
 
+//  @notice Buy the token(ticket) for the event
+//  @return Transaction Id of the buyToken function transaction performed
 export const buyToken = (tokenId) => {
   return new Promise(async (resolve, reject) => {
     try {

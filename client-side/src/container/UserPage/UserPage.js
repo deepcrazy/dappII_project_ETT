@@ -6,14 +6,11 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  // CardMedia,
-  // IconButton,
   Box,
   // FormControl,
   Button,
 } from "@material-ui/core";
 import { green, red, grey } from "@material-ui/core/colors";
-// import Verification from "../../components/Verification/Verification";
 // import styles from "./UserPage.module.scss";
 import {
   getEventName,
@@ -24,7 +21,6 @@ import eventTicketingTokenInfo from "../../scripts/eventTicketingTokenInfo";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSelector } from "react-redux";
-// import moment from "moment";
 // import { Alert, AlertTitle } from "@material-ui/lab";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,19 +54,26 @@ const useCardStyles = makeStyles({
   },
 });
 
+// Main user page function
 function UserPage() {
   const classes = useStyles();
   const classesCard = useCardStyles();
 
+  // get the user logged in address
   const account = useSelector((state) => {
     return state.account;
   });
-
-  // const maximumSeats = useSelector(state => {
-  //   return state.maximumSeats;
-  // })
+  
+  // Different React states
   const [bookingStatus, setBookingStatus] = useState(false);
+  const [status, setStatus] = React.useState(false);
+  const [eventName, setEventName] = React.useState("");
+  const [maxSeats, setMaxSeats] = React.useState(0);
+  // const [eventOwner, setEventOwner] = React.useState("");
+  const [seatSelected, setSeatSelected] = React.useState("");
+  const [seatSelectedColor, setSeatSelectedColor] = useState(false);
 
+  // On click 'BookSeat' Button  functionality
   const bookseat = async (event) => {
     event.preventDefault();
     console.log("Successfully booked..!!");
@@ -85,19 +88,14 @@ function UserPage() {
       });
   };
 
-  const [status, setStatus] = React.useState(false);
-  const [eventName, setEventName] = React.useState("");
-  const [maxSeats, setMaxSeats] = React.useState(0);
-  // const [eventOwner, setEventOwner] = React.useState("");
-  const [seatSelected, setSeatSelected] = React.useState("");
-
-  //set contract calls
+  //set contract calls (FROM address)
   useEffect(() => {
     console.log("setting FROM account for eventTicketingToken contract");
     console.log(account);
     eventTicketingTokenInfo.options.from = account;
   }, [account]);
 
+  // Get Event Name of the  event created  from the  blockchain
   useEffect(() => {
     getEventName()
       .then((res) => {
@@ -110,6 +108,7 @@ function UserPage() {
       });
   });
 
+  //  Get the Maximum number  of  seats  for the event created from the blockchain
   useEffect(() => {
     getMaximumSeats()
       .then((res) => {
@@ -124,18 +123,7 @@ function UserPage() {
   }, [maxSeats]);
   console.log(maxSeats);
 
-  // const onChangeEventName = (event) => {
-  //   event.preventDefault();
-  //   setEventName(event.target.value);
-  // };
-
-  // const onChangeMaxSeats = (event) => {
-  //   event.preventDefault();
-  //   setMaxSeats(event.target.value);
-  // };
-
-  const [seatSelectedColor, setSeatSelectedColor] = useState(false);
-
+  //  On clicking  seat button functionality
   const onClickSeatSelected = (event) => {
     event.preventDefault();
     console.log("coming to seat selected function..!!");
@@ -150,12 +138,10 @@ function UserPage() {
       setSeatSelected(false);
       setSeatSelected("");
     }
-
-    // setSeatSelectedColor(!seatSelectedColor);
-    // setSeatSelected(temp);
   };
   console.log(seatSelected);
 
+  //  Function to create the maximum number of seats available for  the  event created.
   const createSeats = () => {
     // const classes = useStyles();
     console.log("coming in create seats function..!!");
@@ -262,13 +248,6 @@ function UserPage() {
             <Card className={styles["bookedSeatBox"]} variant="outlined">
               <CardHeader title="Booked Token Details" />
               <CardContent>
-                {/* <Typography
-                className={classesCard.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Booked Token
-              </Typography> */}
                 <Typography variant="h4" component="h2">
                   <Grid container direction="column">
                     <Box m={2}></Box>
@@ -301,34 +280,6 @@ function UserPage() {
         </div>
       )}
 
-      {/* <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
-          </Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
-        </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image="/static/images/cards/live-from-space.jpg"
-        title="Live from space album cover"
-      />
-    </Card> */}
     </div>
   );
 }
