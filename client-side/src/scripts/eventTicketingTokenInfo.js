@@ -4,7 +4,7 @@ import EventTicketingToken from "../contracts/EventTicketingToken.json";
 const web3 = new Web3(window.web3.currentProvider);
 // const address = "0x45166A684dc43d2F78898166F51Bc10e3728bF1f"; // Contract Address
 // const address = "0x16f12E0D52b2bA2b38b5f56ed59250a59AfABBba"; // ropsten address
-const address = "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"; //ganache deployment address
+const address = "0xD833215cBcc3f914bD1C9ece3EE7BF8B14f841bb"; //ganache deployment address
 const ABI = EventTicketingToken.abi;
 
 //Web3 connect contract based on ABI and Address

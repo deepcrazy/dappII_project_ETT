@@ -17,12 +17,6 @@ This project aims on solving this problem by using Blockchain Technology which e
 
 _Note:_ This project is a simple POC to demostrate the flow of eliminating the middlemen which includes simple setup by  which an ``Event Organiser`` can create an Event by inputing Event Details and ``User`` can buy the ticket and in return user will receive the ``tokenId`` corresponding to the ``seat no`` selected for booking.
 
-<!-- ## Description
-
-Events are the popular form of an entertainment. Baseball match, football match, touring artists/concerts, world cups , small performances, conference etc. are the different types of events globally happening for entertainment. For all these events, the current traditional way of tickets is paper-based and are purchased for third party platforms which charges high percentage (approximately 27%) as an extra fee. All this further raises the questions, Can the user trust getting the ticket on fair price? Also, Is the ticket bought is original one or fake.? <br>
-<br>
-This project, therefore, aims to eliminate the third party/middle-man from the event organizer and customers flow using Ethereum Blockchain. The paper-based tickets will be tokenized into ETT (which are ERC-721 uniqie tokens). -->
-
 # Business Model
 
 1. Event Host
@@ -46,13 +40,13 @@ This project, therefore, aims to eliminate the third party/middle-man from the e
 
 ![Simple ERC721 based token model](./documents/images/simple_token_model_interface_ERC721.png)
 
-# Timeline/Implementation
-
-![](./documents/images/Roadmap_to_launch.png)
-
 # Simple Flow for creation, (re)sale, and use of ETT Tokens
 
 ![Flow Diagram](./documents/images/flow_diagram_ERC721_token_model.png)
+
+# Timeline/Implementation
+
+![](./documents/images/Roadmap_to_launch.png)
 
 # Syetem Organization
 
@@ -142,9 +136,32 @@ Event Ticketing Token(ETT)
 | getUserId     | `address _address` | `bytes32 userId`       | Logged in User     | Get the user id for the current logged in user                                                     |
 | getAllUserId  | N/A                | `bytes32[] userIdList` | Only Owner         | Get all the user ids for all users                                                                 |
 
+# Steps to run this dApp
+
+1. Run `ganache-cli -d` locally
+2. Run git clone `https://github.com/deepcrazy/dappII_project_ETT.git`
+3. cd dappII_project_ETT/eth-side
+4. Run `truffle migrate`
+5. Copy the  EventTicketingToken contract address from the output of previous step.
+6. Paste this copied contract address into `../client-side/src/scripts/eventTicketingTokenInfo.js` file at `Line: 7` by replacing the existing one.
+7. cd ../clide-side
+8. Run `npm install`
+9. Run `npm start`
+
 # Notes
 1. Most of the functionality is implemented by considering 1 event and not multiple events as part of POC.
 2. Validations are restricted to tokenIds only and other validations are kept for future scope.
+
+# Future scope
+
+1. Buring of tokens after the event gets finished (not implemented as of now.)
+2. Input more details while creating the event like `event location, event day and time, event guest(optional) etc.`
+3. User should be able to see all the events available created via dapp.
+4. User should able to book multiple seat instead of one seat(which is a current behaviour)
+5. User  should be able to see his own balance after making the payment.
+6. User should be able to see `Order history`.
+7. Event Organiser should get notified `No of total tickets sold` everytime buyer purchase the token.
+
 
 # Resources
 
