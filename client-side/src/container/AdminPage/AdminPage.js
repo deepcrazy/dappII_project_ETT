@@ -2,13 +2,6 @@ import React, { useEffect } from "react";
 import {
   // Box,
   Typography,
-  // Table,
-  // TableContainer,
-  // TableHead,
-  // TableBody,
-  // TableRow,
-  // TableCell,
-  // Paper,
   TextField,
   Button,
   Card,
@@ -28,38 +21,41 @@ import styles from "../../components/Event/Event.module.scss";
 
 // const BigNumber = require("bignumber.js");
 
+// Main function for AdminPage
 export const AdminPage = () => {
-
+  
   const account = useSelector((state) => {
     console.log("Admin page");
     return state.account;
   });
   console.log(account);
+  
+  // Different React states
+  const [eventName, setEventName] = React.useState("");
+  const [maxSeats, setMaxSeats] = React.useState("");
+  const [eventCreateStatus, setEventCreateStatus] = React.useState(false);
+  const [eventOwner, setEventOwner] = React.useState("");
 
-  //set contract calls
+  //set contract calls (FROM account for contarct calls)
   useEffect(() => {
     console.log("setting FROM account for eventTicketingToken contract");
     console.log(account);
     eventTicketingTokenInfo.options.from = account;
   }, [account]);
-
-  // const [status, setStatus] = React.useState(false);
-  const [eventName, setEventName] = React.useState("");
-  const [maxSeats, setMaxSeats] = React.useState("");
-  const [eventCreateStatus, setEventCreateStatus] = React.useState(false);
-
+  
+  //  storing the  event name
   const onChangeEventName = (event) => {
     // event.preventDefault();
     setEventName(event.target.value);
   };
 
+  // storing the max number of seats
   const onChangeMaxSeats = (event) => {
     // event.preventDefault();
     setMaxSeats(event.target.value);
   };
 
-  const [eventOwner, setEventOwner] = React.useState("");
-
+  //  on click  createEvent Button functinality
   const handleCreateEvent = async (event) => {
     console.log(eventName);
     console.log(maxSeats);
@@ -95,11 +91,7 @@ export const AdminPage = () => {
             className={styles["mg-10"]}
             value={eventName}
             onChange={onChangeEventName}
-            // disabled={!!props.status}
-            // InputProps={{
-            //   endAdornment: <InputAdornment position="start">Ether</InputAdornment>,
-            //   inputComponent: NumberFormatCustom
-            // }}
+            
           />
           <TextField
             label="Maximum Number of Seats"
